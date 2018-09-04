@@ -1,0 +1,72 @@
+<div *ngIf="!data">
+  <mat-spinner></mat-spinner>
+</div>
+<table mat-table [dataSource]="data" multiTemplateDataRows matSort disabled=true>
+      <ng-container matColumnDef="billId">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> Bill Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
+      </ng-container>
+      <ng-container matColumnDef="vendorName">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.vendorName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="billAmount">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> Bill Total </th>
+        <td mat-cell *matCellDef="let element"> {{element.billAmount}} </td>
+      </ng-container>
+      <ng-container matColumnDef="billDate">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.billDate|date:'medium'}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <table mat-table [dataSource]="element.billItems" class="mat-elevation-z8">
+              <ng-container matColumnDef="productName">
+                <th mat-header-cell *matHeaderCellDef> productName </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.product.productName}}</td>
+              </ng-container>
+              <ng-container matColumnDef="brandName">
+                <th mat-header-cell *matHeaderCellDef> brandName </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.brand.brandName}}</td>
+              </ng-container>
+              <ng-container matColumnDef="productQuantity">
+                <th mat-header-cell *matHeaderCellDef> productQuantity </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.productQuantity}} </td>
+              </ng-container>
+              <ng-container matColumnDef="actualProductPrice">
+                <th mat-header-cell *matHeaderCellDef> actualProductPrice</th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.actualProductPrice}} </td>
+              </ng-container>
+              <ng-container matColumnDef="billedProductPrice">
+                <th mat-header-cell *matHeaderCellDef> billedProductPrice</th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.billedProductPrice}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalPrice">
+                <th mat-header-cell *matHeaderCellDef> totalPrice</th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.totalPrice}} </td>
+              </ng-container>
+              <ng-container matColumnDef="star" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon>more_vert</mat-icon>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="billItemsDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: billItemsDisplayedColumns;"></tr>
+            </table>
+          </div>
+        </td>
+      </ng-container>
+    </table>

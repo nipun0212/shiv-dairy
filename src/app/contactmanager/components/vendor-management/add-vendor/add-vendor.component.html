@@ -1,0 +1,30 @@
+<div class="flex-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add New Vendor Details</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="vendorForm">
+      <mat-card-content>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Vendor Name</mat-label>
+            <input formControlName="vendorName" matInput>
+            <mat-error *ngIf="vendorForm.get('vendorName').hasError('required')">
+              Vendor Name is Required
+            </mat-error>
+            <mat-error class="error" *ngIf="vendorForm.get('vendorName').hasError('isVendorNameUnique')">
+              Vendor with this name is already regitered
+            </mat-error>
+            <mat-error class="error" *ngIf="vendorForm.get('vendorName').hasError('pattern')">
+              Only Alphabet Allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-button (click)="goBack()">Back</button>
+        <button mat-button (click)="onSubmit()" disabled="{{vendorForm.invalid}}">Submit</button>
+      </mat-card-content>
+    </form>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>

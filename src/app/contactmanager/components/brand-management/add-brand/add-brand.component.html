@@ -1,0 +1,36 @@
+<div class="flex-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add New Brand Details</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="brandForm">
+      <mat-card-content>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Brand Name</mat-label>
+            <input formControlName="brandName" matInput>
+            <mat-error *ngIf="brandForm.get('brandName').hasError('required')">
+              Brand Name is Required
+            </mat-error>
+            <mat-error class="error" *ngIf="brandForm.get('brandName').hasError('isBrandNameUnique')">
+              Brand with this name is already regitered
+            </mat-error>
+            <mat-error class="error" *ngIf="brandForm.get('brandName').hasError('pattern')">
+              Brand Name is alphanumeric (Start with characters)
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Brand Description</mat-label>
+            <textarea formControlName="brandDescription" matInput></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-button (click)="goBack()">Back</button>
+        <button mat-button (click)="onSubmit()" disabled="{{brandForm.invalid}}">Submit</button>
+      </mat-card-content>
+    </form>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>

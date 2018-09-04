@@ -1,0 +1,36 @@
+<div class="flex-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add New Product Details</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="productForm">
+      <mat-card-content>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Product Name</mat-label>
+            <input formControlName="productName" matInput>
+            <mat-error *ngIf="productForm.get('productName').hasError('required')">
+              Product Name is Required
+            </mat-error>
+            <mat-error class="error" *ngIf="productForm.get('productName').hasError('isProductNameUnique')">
+              Product with this name is already regitered
+            </mat-error>
+            <mat-error class="error" *ngIf="productForm.get('productName').hasError('pattern')">
+              The Email field must contain a valid email address.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Product Description</mat-label>
+            <textarea formControlName="productDescription" matInput></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-button (click)="goBack()">Back</button>
+        <button mat-button (click)="onSubmit()" disabled="{{productForm.invalid}}">Submit</button>
+      </mat-card-content>
+    </form>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>

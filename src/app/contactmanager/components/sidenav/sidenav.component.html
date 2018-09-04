@@ -1,0 +1,48 @@
+<mat-sidenav-container class="app-drawer-container">
+  <mat-sidenav class="app-drawer mat-elevation-z10" #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('product')">
+          product
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('brand')">
+          brand
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('vendor')">
+          vendor
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('bill')">
+          addbill
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('bill/viewBills')">
+          viewbill
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('billpayment')">
+          add payment
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine (click)="navigateTo('payment/display')">
+          view payment
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="app-drawer-content">
+    <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,19 @@
+<button type="button" class='btn btn-primary' (click)='addVendor()'>Add Vendor</button>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="vendorId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> VendorId </th>
+      <td mat-cell *matCellDef="let element" (click)="viewVendor(element.vendorWebSafeKey)"> {{element.vendorId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="vendorName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor Name </th>
+      <td mat-cell *matCellDef="let element" (click)="viewVendor(element.vendorWebSafeKey)">
+        {{element.vendorName| titlecase}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
